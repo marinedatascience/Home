@@ -1,0 +1,12 @@
+name: "Marine Data Science"
+output_dir: "."
+navbar:
+  title: "Marine Data Science"
+  left:
+    - text: "Tidyverse"
+      href: tidyverse.html
+
+output:
+  html_document:
+    theme: paper
+    css: 'styles.css'
