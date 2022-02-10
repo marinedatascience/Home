@@ -4,6 +4,5 @@ pagetitle: "Marine Data Science"
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">
-<link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
 <img src="https://tidyverse.tidyverse.org/logo.png" style="width:20%; margin-right: 20px" align="left">
