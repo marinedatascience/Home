@@ -1,8 +1,115 @@
 ---
-title: " "
+title: ""
 pagetitle: "Marine Data Science"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">
 
-<img src="https://tidyverse.tidyverse.org/logo.png" style="width:20%; margin-right: 20px" align="left">
+<img src="https://tidyverse.tidyverse.org/logo.png" style="width:20%; margin-right: 20px" align="right">
+
+# Tidyverse
+
+## Introduction to Tidyverse
+
+[Tidyverse](https://www.tidyverse.org/packages/) is a collection of R packages used in everyday data analysis. 
+
+Packages include: 
+
+- [ggplot2](https://ggplot2.tidyverse.org/)
+
+- [dplyr](https://dplyr.tidyverse.org/)
+
+- [tidyr](https://tidyr.tidyverse.org/)
+
+- [readr](https://readr.tidyverse.org/)
+
+- [purr](https://purrr.tidyverse.org/)
+
+- [tibble](https://tibble.tidyverse.org/)
+
+- [stringr](https://stringr.tidyverse.org/)
+
+- [gorcats](https://forcats.tidyverse.org/)
+
+
+Within Tidyverse, these are the functions are most commonly used to manipulate data: 
+
+- `filter()` allows you to select a subset of rows in a data frame
+
+- `select()` picks variables based on their names
+
+- `group_by()` groups by a certain variable 
+
+- `summarize()` reduces multiple values down to a single summary
+
+- `arrange()` sorts the observations in a dataset in ascending or descending order based on one of its variables
+
+- `mutate()` allows you to update or create new columns of a data frame
+
+<br>
+
+### Sea Surface Temperature Data
+
+```{r, message = F}
+#load the package
+library(tidyverse)
+
+#load the data
+#source: https://www.metoffice.gov.uk/hadobs/hadsst4/
+sst <- read.csv("https://www.metoffice.gov.uk/hadobs/hadsst4/data/csv/HadSST.4.0.1.0_annual_GLOBE.csv")
+
+#check the first couple of rows
+head(sst)
+
+#remove unwanted columns by their numbers
+sst <- sst %>%
+  select(-c(3:9))
+
+head(sst)
+
+#filter for since the year 2000
+sst <- sst %>%
+  filter(year >= 2000)
+
+head(sst)
+
+#arrange from highest to lowest
+sst <- sst %>%
+  arrange(desc(anomaly))
+
+head(sst) #highest anomaly was within the last 6 years
+
+#barplot
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_col()
+
+#line and dots
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_point() +
+  geom_line(linetype = "dashed")
+  
+#improved plot
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_smooth(method = "loess") +
+  labs(x = "Year", y = "Anomaly (deg C)", title = "Sea surface temperature data anomaly \n(Relative to 1961-1990)")
+
+#plot whole dataseries
+sst <- read.csv("https://www.metoffice.gov.uk/hadobs/hadsst4/data/csv/HadSST.4.0.1.0_annual_GLOBE.csv")
+
+sst <- sst %>%
+  select(-c(3:9))
+
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_smooth(method = "loess") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Year", y = "Anomaly (deg C)", title = "Sea surface temperature data anomaly \n(Relative to 1961-1990)")
+```
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

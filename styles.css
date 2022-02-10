@@ -1,23 +1,23 @@
 h1 {
-  font-size: 40px;
+  font-size: 30px;
 }
 h1.title {
-  font-size: 40px;
+  font-size: 30px;
 }
 h2 {
-  font-size: 25px;
+  font-size: 27px;
 }
 h3 {
-  font-size: 20px;
+  font-size: 25px;
 }
 h4 {
-  font-size: 20px;
+  font-size: 22px;
 }
 h5 {
-  font-size: 15px;
+  font-size: 20px;
 }
 h6 {
-  font-size: 12px;
+  font-size: 15px;
 }
 img {
     display: block;

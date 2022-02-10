@@ -7,4 +7,10 @@ pagetitle: "Marine Data Science"
 
 <img src="https://raw.githubusercontent.com/marinedatascience/home/main/logo.png" style="width:25%; margin-right: 20px" align="left">
 
+<div style="float: left;">
+
 ## Marine Data Science
+
+
+
+</div> 

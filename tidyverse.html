@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -220,6 +223,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -227,6 +293,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -263,10 +339,144 @@ $(document).ready(function () {
 
 
 <p><link rel="stylesheet" href="styles.css" type="text/css"></p>
-<p><img src="https://tidyverse.tidyverse.org/logo.png" style="width:20%; margin-right: 20px" align="left"></p>
+<p><img src="https://tidyverse.tidyverse.org/logo.png" style="width:20%; margin-right: 20px" align="right"></p>
+<div id="tidyverse" class="section level1">
+<h1>Tidyverse</h1>
+<div id="introduction-to-tidyverse" class="section level2">
+<h2>Introduction to Tidyverse</h2>
+<p><a href="https://www.tidyverse.org/packages/">Tidyverse</a> is a collection of R packages used in everyday data analysis.</p>
+<p>Packages include:</p>
+<ul>
+<li><p><a href="https://ggplot2.tidyverse.org/">ggplot2</a></p></li>
+<li><p><a href="https://dplyr.tidyverse.org/">dplyr</a></p></li>
+<li><p><a href="https://tidyr.tidyverse.org/">tidyr</a></p></li>
+<li><p><a href="https://readr.tidyverse.org/">readr</a></p></li>
+<li><p><a href="https://purrr.tidyverse.org/">purr</a></p></li>
+<li><p><a href="https://tibble.tidyverse.org/">tibble</a></p></li>
+<li><p><a href="https://stringr.tidyverse.org/">stringr</a></p></li>
+<li><p><a href="https://forcats.tidyverse.org/">gorcats</a></p></li>
+</ul>
+<p>Within Tidyverse, these are the functions are most commonly used to manipulate data:</p>
+<ul>
+<li><p><code>filter()</code> allows you to select a subset of rows in a data frame</p></li>
+<li><p><code>select()</code> picks variables based on their names</p></li>
+<li><p><code>group_by()</code> groups by a certain variable</p></li>
+<li><p><code>summarize()</code> reduces multiple values down to a single summary</p></li>
+<li><p><code>arrange()</code> sorts the observations in a dataset in ascending or descending order based on one of its variables</p></li>
+<li><p><code>mutate()</code> allows you to update or create new columns of a data frame</p></li>
+</ul>
+<p><br></p>
+<div id="sea-surface-temperature-data" class="section level3">
+<h3>Sea Surface Temperature Data</h3>
+<pre class="r"><code>#load the package
+library(tidyverse)
+
+#load the data
+#source: https://www.metoffice.gov.uk/hadobs/hadsst4/
+sst &lt;- read.csv(&quot;https://www.metoffice.gov.uk/hadobs/hadsst4/data/csv/HadSST.4.0.1.0_annual_GLOBE.csv&quot;)
+
+#check the first couple of rows
+head(sst)</code></pre>
+<pre><code>##   year  anomaly total_uncertainty uncorrelated_uncertainty
+## 1 1850 -0.30950           0.11511                  0.00912
+## 2 1851 -0.19337           0.11618                  0.00958
+## 3 1852 -0.18339           0.11072                  0.01073
+## 4 1853 -0.21098           0.09815                  0.00851
+## 5 1854 -0.26843           0.09068                  0.00724
+## 6 1855 -0.24173           0.08958                  0.00622
+##   correlated_uncertainty bias_uncertainty coverage_uncertainty
+## 1                0.09255          0.04338              0.05216
+## 2                0.09721          0.04269              0.04620
+## 3                0.09169          0.04133              0.04504
+## 4                0.07829          0.03854              0.04413
+## 5                0.07324          0.03695              0.03797
+## 6                0.06927          0.03646              0.04310
+##   lower_bound_95pct_bias_uncertainty_range
+## 1                                 -0.40579
+## 2                                 -0.28779
+## 3                                 -0.27454
+## 4                                 -0.29375
+## 5                                 -0.34812
+## 6                                 -0.31821
+##   upper_bound_95pct_bias_uncertainty_range
+## 1                                 -0.23192
+## 2                                 -0.11750
+## 3                                 -0.10496
+## 4                                 -0.14112
+## 5                                 -0.20058
+## 6                                 -0.17362</code></pre>
+<pre class="r"><code>#remove unwanted columns by their numbers
+sst &lt;- sst %&gt;%
+  select(-c(3:9))
+
+head(sst)</code></pre>
+<pre><code>##   year  anomaly
+## 1 1850 -0.30950
+## 2 1851 -0.19337
+## 3 1852 -0.18339
+## 4 1853 -0.21098
+## 5 1854 -0.26843
+## 6 1855 -0.24173</code></pre>
+<pre class="r"><code>#filter for since the year 2000
+sst &lt;- sst %&gt;%
+  filter(year &gt;= 2000)
+
+head(sst)</code></pre>
+<pre><code>##   year anomaly
+## 1 2000 0.28053
+## 2 2001 0.39199
+## 3 2002 0.43434
+## 4 2003 0.45946
+## 5 2004 0.43760
+## 6 2005 0.44789</code></pre>
+<pre class="r"><code>#arrange from highest to lowest
+sst &lt;- sst %&gt;%
+  arrange(desc(anomaly))
+
+head(sst) #highest anomaly was within the last 6 years</code></pre>
+<pre><code>##   year anomaly
+## 1 2016 0.71945
+## 2 2019 0.71702
+## 3 2020 0.70991
+## 4 2015 0.70045
+## 5 2017 0.64483
+## 6 2021 0.63219</code></pre>
+<pre class="r"><code>#barplot
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_col()</code></pre>
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>#line and dots
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_point() +
+  geom_line(linetype = &quot;dashed&quot;)</code></pre>
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code>#improved plot
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_smooth(method = &quot;loess&quot;) +
+  labs(x = &quot;Year&quot;, y = &quot;Anomaly (deg C)&quot;, title = &quot;Sea surface temperature data anomaly \n(Relative to 1961-1990)&quot;)</code></pre>
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-1-3.png" width="672" /></p>
+<pre class="r"><code>#plot whole dataseries
+sst &lt;- read.csv(&quot;https://www.metoffice.gov.uk/hadobs/hadsst4/data/csv/HadSST.4.0.1.0_annual_GLOBE.csv&quot;)
+
+sst &lt;- sst %&gt;%
+  select(-c(3:9))
+
+ggplot(sst, aes(x = year, y = anomaly)) +
+  geom_smooth(method = &quot;loess&quot;) +
+  geom_hline(yintercept = 0, linetype = &quot;dashed&quot;) +
+  labs(x = &quot;Year&quot;, y = &quot;Anomaly (deg C)&quot;, title = &quot;Sea surface temperature data anomaly \n(Relative to 1961-1990)&quot;)</code></pre>
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-1-4.png" width="672" /></p>
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
+
+</div>
+</div>
+</div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -299,6 +509,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
